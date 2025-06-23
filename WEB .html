@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAJ PRO MODS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: red;
+            margin-top: 20px;
+       }
+            h2 {
+              color: yellow
+            
+        }
+        .result-container {
+            margin-top: 40px;
+        }
+        .text-field {
+            margin: 40px auto;
+            padding: 15px;
+            font-size: 18px;
+            width: 300px;
+            border: 2px solid red;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #333;
+            color: red;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .result-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: red;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .result-button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <h1>RAJ PRO MODS</h1>
+    <h2>VIP PVT WEB </h2>
+    <form>
+        <select>
+            <option disabled="">choose a game</option>
+            <option>BDG WIN</option>
+            <option>OK WIN</option>
+            <option>BIG MUMBAI</option>
+            <option>91 CLUB</option>
+        </select>  
+    </form> 
+    
+    <div class="result-container">
+        <div id="Textview2" class="text-field">Period Number: </div>
+        <div id="Textview1" class="text-field">Result: </div>
+        <div class="button-container">
+            <button class="result-button" onclick="updateResult()">Get Result</button>
+        </div>
+    </div>
+
+    <script>
+        function updateResult() {
+            const calendar = new Date();
+            const hour = calendar.getHours();
+            const minute = calendar.getMinutes();
+            const totalMinutes = (hour * 60) + minute;
+
+            // Format the date as yyyyMMdd
+            const currentDate = calendar.toISOString().slice(0, 10).replace(/-/g, '');
+
+            // Calculate period number based on minutes and offset (330 minutes = 5 hours 30 mins)
+            const offset = 330;
+            const periodCalculation = 10001 + totalMinutes - offset;
+            const periodNumber = currentDate + "1000" + periodCalculation;
+
+            // Set calculated period number to the text field
+            document.getElementById('Textview2').textContent = "Period Number: " + periodNumber;
+
+            // Calculate digit sum for period calculation
+            let digitSum = 0;
+            String(periodCalculation).split('').forEach(digit => {
+                digitSum += parseInt(digit, 10);
+            });
+
+            // Calculate result based on digit sum
+            const resultNumber = (digitSum * 7) % 10;
+            const result = (resultNumber >= 1 && resultNumber <= 4) ? "SMALL" : "BIG";
+
+            // Set BIG or SMALL result to text field
+            document.getElementById('Textview1').textContent = "Result: " + result;
+        }
+
+        // Automatically update the result every minute
+        setInterval(updateResult, 60000);
+
+        // Initial call to display the result on page load
+        updateResult();
+    </script>
+</body>
+</html>
+
+    
